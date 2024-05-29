@@ -1,0 +1,63 @@
+<h2 class="text-primary">Reactivos: <small class="text-muted">Dinámicos</small></h2>
+<hr class="mb-4">
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()" autocomplete="off" class="p-4 bg-light shadow-sm rounded">
+
+    <!-- Nombre -->
+    <div class="mb-3 row align-items-center">
+        <label for="personName" class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+            <input id="personName" type="text" class="form-control" formControlName="name" placeholder="Nombre de la persona">
+            <span *ngIf="isValidField('name')" class="form-text text-danger">
+                {{ getFieldError('name') }}
+            </span>
+        </div>
+    </div>
+
+    <!-- Agregar Favorito -->
+    <div class="mb-3 row align-items-center">
+        <label for="addFavorite" class="col-sm-3 col-form-label">Agregar</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input id="addFavorite" [formControl]="newFavorite" type="text" class="form-control" placeholder="Agregar favorito">
+                <button (click)="onAddFavorite()" class="btn btn-outline-primary" type="button">Agregar favorito</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista de Juegos Favoritos -->
+    <div class="mb-3 row align-items-center">
+        <label class="col-sm-3 col-form-label">Favoritos</label>
+        <div class="col-sm-9" formArrayName="favouriteGames">
+            <div class="mb-2" *ngFor="let control of favouriteGames.controls; let i = index">
+                <div class="input-group">
+                    <input [formControlName]="i" class="form-control">
+                    <button (click)="onDeleteFavorite(i)" class="btn btn-outline-danger" type="button">Eliminar</button>
+                </div>
+                <span *ngIf="isValidFieldArray(favouriteGames, i)" class="form-text text-danger">
+                    Este campo es requerido
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón Guardar -->
+    <div class="row">
+        <div class="col text-end">
+            <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">Guardar</button>
+        </div>
+    </div>
+</form>
+
+<div class="mt-5">
+    <h5>Datos Guardados</h5>
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let data of savedData">
+            <strong>Nombre:</strong> {{ data.name }} <br>
+            <strong>Favoritos:</strong>
+            <ul>
+                <li *ngFor="let game of data.favouriteGames">{{ game }}</li>
+            </ul>
+        </li>
+    </ul>
+</div>

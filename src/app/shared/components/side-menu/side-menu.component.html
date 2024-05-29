@@ -1,0 +1,24 @@
+<h2 class="text-primary">Páginas</h2>
+<hr class="mb-4">
+
+<h3 class="mt-4 text-secondary">Reactivos</h3>
+<ul class="list-group shadow-sm mb-4">
+  <li
+    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+    *ngFor="let menuItem of reactiveMenu"
+    [routerLink]="[menuItem.router]"
+    routerLinkActive="active">
+    {{ menuItem.title }}
+  </li>
+</ul>
+
+<h3 class="mt-4 text-secondary">Validaciones</h3>
+<ul class="list-group shadow-sm">
+  <li
+    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+    *ngFor="let menuItem of authMenu"
+    [routerLink]="[menuItem.router]"
+    routerLinkActive="active">
+    {{ menuItem.title }}
+  </li>
+</ul>

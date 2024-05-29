@@ -1,0 +1,53 @@
+<h2 class="text-primary">Reactivos: Básicos</h2>
+<hr class="mb-4">
+
+<div class="row justify-content-center">
+  <div class="col-md-8">
+
+    <form [formGroup]="myForm" (ngSubmit)="onSave()" autocomplete="off" class="p-4 bg-light shadow-sm rounded">
+
+      <!-- Campo de producto -->
+      <div class="mb-3 row align-items-center">
+        <label for="productName" class="col-sm-3 col-form-label">Producto</label>
+        <div class="col-sm-9">
+          <input id="productName" type="text" class="form-control" formControlName="name" placeholder="Nombre del producto">
+          <span *ngIf="isValidField('name')" class="form-text text-danger">
+            {{ getFieldError('name') }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Campo de precio -->
+      <div class="mb-3 row align-items-center">
+        <label for="productPrice" class="col-sm-3 col-form-label">Precio</label>
+        <div class="col-sm-9">
+          <input id="productPrice" type="number" class="form-control" formControlName="price" placeholder="Precio del producto">
+          <span *ngIf="isValidField('price')" class="form-text text-danger">
+            El precio debe de ser 0 o mayor
+          </span>
+        </div>
+      </div>
+
+      <!-- Campo de existencias -->
+      <div class="mb-3 row align-items-center">
+        <label for="productStock" class="col-sm-3 col-form-label">Existencias</label>
+        <div class="col-sm-9">
+          <input id="productStock" type="number" class="form-control" formControlName="inStorage" placeholder="Existencias del producto">
+          <span *ngIf="isValidField('inStorage')" class="form-text text-danger">
+            Las existencias deben de ser 0 o mayor
+          </span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col text-end">
+          <button type="submit" class="btn btn-primary">
+            Guardar
+          </button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>
